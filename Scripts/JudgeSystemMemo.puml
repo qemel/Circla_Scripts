@@ -1,0 +1,52 @@
+﻿@startuml
+
+class LaneJudgeHandler{
+    +LaneJudgeHandler()
+    +Judge(float time, float noteTime)
+    +GetJudgeResult(float time, float noteTime)
+}
+
+
+class GameInputService{
+    +GameInputService()
+    +GameTimer Timer
+    +OnInput()
+}
+
+class Lane{
+    +Lane()
+    +LaneNotes Notes
+    +LaneNoteSpawner Spawner
+    +LaneJudgeHandler Judge
+    +Update()
+}
+
+class Note
+
+class LaneNotes{
+    +Queue<Note> Notes
+    +Enqueue(Note note)
+    +Dequeue()
+}
+
+class GameTimer{
+    -float time
+    +GameTimer()
+    +Update()
+    +GetTime()
+}
+
+class LaneNoteSpawner{
+    +LaneNoteSpawner()
+    +Spawn(Note note)
+}
+
+
+Lane --> LaneNotes
+Lane --> LaneNoteSpawner
+Lane --> LaneJudgeHandler
+LaneNotes --> Note
+
+GameInputService --> GameTimer
+
+@enduml
